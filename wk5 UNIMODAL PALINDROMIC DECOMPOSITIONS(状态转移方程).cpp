@@ -13,7 +13,7 @@ void Search() {
 				Find[num][k] = 0; //不会有的
 			}
 			else {
-				Find[num][k] = 1;  //随便置一个先
+				Find[num][k] = 1;  //小值开始decompose的时候都是1
 			}
 		}
 	}
