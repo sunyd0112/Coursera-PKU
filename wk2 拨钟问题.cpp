@@ -9,7 +9,7 @@ int clock1[10], moveclock1[10], moveclock11[10], minimum = 28; vector<int> v;
 void guess(int i, int j, int k) {
 	int step = 0;
 	moveclock1[1] = i; moveclock1[2] = j; moveclock1[3] = k;
-	moveclock1[4] = (4 - (clock1[1] + moveclock1[1] + moveclock1[2]) % 4) % 4;//看超了4多少 然后就可以确定
+	moveclock1[4] = (4 - (clock1[1] + moveclock1[1] + moveclock1[2]) % 4) % 4;
 	moveclock1[5] = (4 - (clock1[2] + moveclock1[1] + moveclock1[2] + moveclock1[3]) % 4) % 4;
 	moveclock1[6] = (4 - (clock1[3] + moveclock1[2] + moveclock1[3]) % 4) % 4;   
 	moveclock1[7] = (4 - (clock1[4] + moveclock1[1] + moveclock1[4] + moveclock1[5]) % 4) % 4; 
