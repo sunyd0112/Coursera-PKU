@@ -11,20 +11,20 @@ typedef long long int LL;
 int N, K;
 LL dp[MAXN + 10][MAXN + 10];
 
-void work1()//Ñ¡K¸ö
+void work1()//é€‰Kä¸ª
 {
 	memset(dp, 0, sizeof(dp));
-	for (int i = 1; i <= N; ++i)//½«i·Ö³É1¸öÊýÖ»ÓÐÒ»ÖÖ·½°¸
+	for (int i = 1; i <= N; ++i)//å°†iåˆ†æˆ1ä¸ªæ•°åªæœ‰ä¸€ç§æ–¹æ¡ˆ
 		dp[i][1] = 1;
 
 	for (int i = 1; i <= N; ++i)
-		for (int j = 2; j <= i; ++j)//½«Ã¿¸öÊýÍ³Ò»¼õ1£¬»òÈ¥µôµ±Ç°ÊýÖÐµÄ1
+		for (int j = 2; j <= i; ++j)//å°†æ¯ä¸ªæ•°ç»Ÿä¸€å‡1ï¼Œæˆ–åŽ»æŽ‰å½“å‰æ•°ä¸­çš„1
 			dp[i][j] = dp[i - j][j] + dp[i - 1][j - 1];
 
-	printf("%d\n", dp[N][K]);//°ÑN·Ö³ÉK¸öÊý
+	printf("%d\n", dp[N][K]);//æŠŠNåˆ†æˆKä¸ªæ•°
 }
 
-void work2()//ÈÎÒâ²»Í¬
+void work2()//ä»»æ„ä¸åŒ
 {
 	memset(dp, 0, sizeof(dp));
 	dp[0][0] = 1;
@@ -32,34 +32,34 @@ void work2()//ÈÎÒâ²»Í¬
 	for (int i = 0; i <= N; i++) 
 	{
 		for (int j = 1; j <= N; j++)
-		{					//µ±Ç°ÓÐÊýÊÇjºÍ½µµÍÉÏÏÞ
+		{					//å½“å‰æœ‰æ•°æ˜¯jå’Œé™ä½Žä¸Šé™
 			if (j <= i)dp[i][j] = dp[i - j][j - 1] + dp[i][j - 1];
-			else dp[i][j] = dp[i][i];//ÉÏÏÞÓ¦Îªi
+			else dp[i][j] = dp[i][i];//ä¸Šé™åº”ä¸ºi
 		}
 	}
 
-	printf("%lld\n", dp[N][N]);//»®·ÖN£¬ÉÏÏÞÎªN
+	printf("%lld\n", dp[N][N]);//åˆ’åˆ†Nï¼Œä¸Šé™ä¸ºN
 }
 
-void work3()//ÈÎÒâÆæÊý£¨»ù±¾Í¬work1£©
+void work3()//ä»»æ„å¥‡æ•°ï¼ˆåŸºæœ¬åŒwork1ï¼‰
 {
 	memset(dp, 0, sizeof(dp));
 	for (int i = 0; i <= N; ++i)
 	{
 		dp[i][1] = 1;
-		if (i & 1)dp[0][i] = 1;//Ô¤´¦ÀíµÚ0²ã
+		if (i & 1)dp[0][i] = 1;//é¢„å¤„ç†ç¬¬0å±‚
 	}
 
 	for (int i = 1; i <= N; i++)
 	{
 		for (int j = 1; j <= N; j++)
 		{
-			if (j & 1)//Í¬work1
+			if (j & 1)//åŒwork1
 			{
 				if (j <= i)dp[i][j] = dp[i - j][j] + dp[i][j - 1];
 				else dp[i][j] = dp[i][i];
 			}
-			else dp[i][j] = dp[i][j - 1];//µ±Ç°·ÇÆæÊý
+			else dp[i][j] = dp[i][j - 1];//å½“å‰éžå¥‡æ•°
 		}
 	}
 
