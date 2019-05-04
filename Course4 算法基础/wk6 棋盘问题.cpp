@@ -9,7 +9,7 @@ void Dfs() {
 	if (total == k) { 
 		sum += 1; return; }
 
-	for (int i = currentR; i <= n; ++i) { //¼ôÖ¦1 ÏÂÒ»¸öµã´ÓÏÂÒ»ÐÐ¿ªÊ¼
+	for (int i = currentR; i <= n; ++i) { //å‰ªæž1 ä¸‹ä¸€ä¸ªç‚¹ä»Žä¸‹ä¸€è¡Œå¼€å§‹
 		for (int j = currentC; j <= n; ++j) {
 			if (a[i][j] == '#' && markR[i] != 1 && markC[j] != 1) {
 				markR[i] = 1; markC[j] = 1; ++total;
