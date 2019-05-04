@@ -7,8 +7,8 @@ using namespace std;
 
 multimap<int, int> Map; multimap<int, int>::iterator mi;
 multiset<int> Set; multiset<int>::iterator si;
-int mark[1035][1035] = { 0 }; //标记垃圾的位置及数量
-int bomb[1035][1035] = { 0 }; //标记炸弹在此处可清理多少垃圾
+int mark[1035][1035] = { 0 }; //鏍囪鍨冨溇鐨勪綅缃強鏁伴噺
+int bomb[1035][1035] = { 0 }; //鏍囪鐐稿脊鍦ㄦ澶勫彲娓呯悊澶氬皯鍨冨溇
 
 int main() {
 	int caseN; cin >> caseN;
