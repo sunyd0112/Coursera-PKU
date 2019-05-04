@@ -18,11 +18,11 @@ bool guess() {
 
 int enumerate() {
 	int r, c, min = s * s + 1, step = 0;
-	for (c = 1; c < s + 1; ++c) { drawing[1][c] = 0; }//µÚÒ»ÐÐÏÈÈ«ÉèÎª0
+	for (c = 1; c < s + 1; ++c) { drawing[1][c] = 0; }//ç¬¬ä¸€è¡Œå…ˆå…¨è®¾ä¸º0
 	while (!drawing[1][s + 1]==1) {
 		if (guess() == false) {
 			++drawing[1][1]; c = 1;
-			while (drawing[1][c] > 1) { drawing[1][c] = 0; ++c; ++drawing[1][c]; }//¶þ½øÖÆ
+			while (drawing[1][c] > 1) { drawing[1][c] = 0; ++c; ++drawing[1][c]; }//äºŒè¿›åˆ¶
 		}
 		else {
 			for (r = 1; r < s + 1; ++r) {
@@ -43,7 +43,7 @@ int main() {
 	int caseN; cin >> caseN;
 	for (int i = 0; i < caseN; ++i) {
 		int r, c, min; cin >> s;
-		for (r = 0; r < s + 1; ++r) { drawing[r][0] = drawing[r][s + 1] = 0; } //ÕâÁ½²½¸øÍâ±ßÒ»È¦ÇåÁã
+		for (r = 0; r < s + 1; ++r) { drawing[r][0] = drawing[r][s + 1] = 0; } //è¿™ä¸¤æ­¥ç»™å¤–è¾¹ä¸€åœˆæ¸…é›¶
 		for (c = 1; c < s + 1; ++c) { drawing[0][c] = 0; }
 		for (r = 1; r < s + 1; ++r) {
 			for (c = 1; c < s + 1; ++c) {
@@ -52,7 +52,7 @@ int main() {
 		}
 		for (r = 1; r < s + 1; ++r) {
 			for (c = 1; c < s + 1; ++c) {
-				if (painting1[r][c] == 'w') { painting[r][c] = 1; } //wy×ª³É01·½±ã¼ÆËã
+				if (painting1[r][c] == 'w') { painting[r][c] = 1; } //wyè½¬æˆ01æ–¹ä¾¿è®¡ç®—
 				else if (painting1[r][c] == 'y') { painting[r][c] = 0; }
 			}
 		}
