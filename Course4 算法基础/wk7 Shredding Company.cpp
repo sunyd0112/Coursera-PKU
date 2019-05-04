@@ -22,13 +22,13 @@ void Dfs(int N, vector<int> putN, vector<int> putM, int lenN) {
 	
 	for (mi=putM.begin(); mi != putM.end() - 1; ++mi) { 
 		if (putM.end() - mi > lenN - 1) { //search the longest length first
-			if (*mi > firstN && lenN==(int)putN.size()) { continue; } //¿ÉĞĞĞÔ¼ôÖ¦1
+			if (*mi > firstN && lenN==(int)putN.size()) { continue; } //å¯è¡Œæ€§å‰ªæ1
 			for (int i = 0; i < lenN; ++i) {
 				if (*(mi + i) > 9) { flag = true; break; } // have combined before
 				combine += *(mi + i) * (int)pow(10, lenN - i - 1); 
 			}
-			if (flag) { combine = 0; flag = false; continue; } //¿ÉĞĞĞÔ¼ôÖ¦2
-			if (combine > N) { combine = 0; continue; } //¿ÉĞĞĞÔ¼ôÖ¦3
+			if (flag) { combine = 0; flag = false; continue; } //å¯è¡Œæ€§å‰ªæ2
+			if (combine > N) { combine = 0; continue; } //å¯è¡Œæ€§å‰ªæ3
 
 			if (mi != putM.begin()) {
 				for (temp = putM.begin(); temp < mi; ++temp) { leftM.push_back(*temp); } //leftM to continue recursion, store the M after combination
@@ -41,7 +41,7 @@ void Dfs(int N, vector<int> putN, vector<int> putM, int lenN) {
 			for (temp = leftM.begin(); temp != leftM.end(); ++temp) { sum += *temp; }
 			//compute whether the sum of this combine will exceed n or not
 
-			if (sum > n) { sum = 0; combine = 0; leftM.clear(); continue; } //¿ÉĞĞĞÔ¼ôÖ¦4
+			if (sum > n) { sum = 0; combine = 0; leftM.clear(); continue; } //å¯è¡Œæ€§å‰ªæ4
 			else if (sum <= n && sum!=0) { 
 				maxi = maxsum.find(sum); bool flagmax = false;
 				if (maxi != maxsum.end()) {
@@ -50,7 +50,7 @@ void Dfs(int N, vector<int> putN, vector<int> putM, int lenN) {
 						flagmax = true;
 						for (vector<int>::iterator tempMax = tempmax.begin(), temp = leftM.begin(); tempMax != tempmax.end(), temp != leftM.end(); ++tempMax, ++temp) {
 							if (*temp != *tempMax) { flagmax = false; break; } //not exactly the same, the flag would turn false
-						} //×îÓÅ»¯¼ôÖ¦1
+						} //æœ€ä¼˜åŒ–å‰ªæ1
 						if (flagmax == false){ maxsum.insert(Map::value_type(sum, leftM)); } //if totally the same, wont add again
 					}
 					else { maxsum.insert(Map::value_type(sum, leftM)); } //not in the same length
