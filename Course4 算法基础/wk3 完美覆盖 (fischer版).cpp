@@ -10,14 +10,14 @@ int count(int n) {
 	return vertical(n) + horizontal(n);
 }
 
-// 垂直方向
+// 麓鹿脰卤路陆脧貌
 int vertical(int n) {
 	if (n == 0) return 0;
 	if (n == 1) return 1;
 	return horizontal(n - 1) + vertical(n - 2);
 }
 
-// 水平方向
+// 脣庐脝陆路陆脧貌
 int horizontal(int n) {
 	if (n == 0) return 1;
 	if (n == 1) return 0;
