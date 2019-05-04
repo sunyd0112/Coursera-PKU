@@ -6,17 +6,17 @@ const int size11 = 4;
 const int dir_num = 4;
 
 struct info {
-	int value;  // ×´Ì¬Öµ 
-	int step;   // ²½Êı
+	int value;  // çŠ¶æ€å€¼ 
+	int step;   // æ­¥æ•°
 };
 int dir[dir_num][2] = {
 		{-1, 0}, {0, 1},
 		{1, 0}, {0, -1},
 };
-int pos[size11 * size11]; // 16 ÖÖ·­×ª×´Ì¬
-bool vis[1 << (size11 * size11)];   //±ê¼ÇÄ³×´Ì¬ÊÇ·ñÒÑ³öÏÖ¹ı
+int pos[size11 * size11]; // 16 ç§ç¿»è½¬çŠ¶æ€
+bool vis[1 << (size11 * size11)];   //æ ‡è®°æŸçŠ¶æ€æ˜¯å¦å·²å‡ºç°è¿‡
 
-// ÅĞ¶ÏÄ³¸öÎ»ÖÃÊÇ·ñÔÚÆåÅÌÄÚ
+// åˆ¤æ–­æŸä¸ªä½ç½®æ˜¯å¦åœ¨æ£‹ç›˜å†…
 bool Judge(int x, int y) {
 	if (x >= 0 && x < size11
 		&& y >= 0 && y < size11)
@@ -24,17 +24,17 @@ bool Judge(int x, int y) {
 	else return false;
 }
 
-// Ô¤´¦Àí 16 ÖÖ·­×ª×´Ì¬
+// é¢„å¤„ç† 16 ç§ç¿»è½¬çŠ¶æ€
 void Initialize() {
 	for (int i = 0; i < size11; ++i) {
 		for (int j = 0; j < size11; ++j) {
-			// i*size11 + j ¼´±àºÅ
+			// i*size11 + j å³ç¼–å·
 			int value = 1 << (i * size11 + j);
 			for (int k = 0; k < dir_num; ++k) {
 				int next_x = i + dir[k][0];
 				int next_y = j + dir[k][1];
 				if (Judge(next_x, next_y))
-					// ¼ÓÉÏ 1<<(±àºÅ) ¼´¿É½«´ËÎ»ÖÃÉèÖÃÎª1
+					// åŠ ä¸Š 1<<(ç¼–å·) å³å¯å°†æ­¤ä½ç½®è®¾ç½®ä¸º1
 					value += 1 << (next_x * size11 + next_y);
 			}
 			pos[i * size11 + j] = value;
@@ -50,12 +50,12 @@ int BFS(int value) {
 	while (!q.empty()) {
 		info f = q.front();
 		q.pop();
-		// ÅÌÃæÈ«ºÚ (0) »òÈ«°× (2^16-1) Ê±½áÊø£¬·µ»Ø²½Êı
+		// ç›˜é¢å…¨é»‘ (0) æˆ–å…¨ç™½ (2^16-1) æ—¶ç»“æŸï¼Œè¿”å›æ­¥æ•°
 		if (f.value == 0 || f.value == (1 << (size11 * size11)) - 1)
 			return f.step;
-		// ËÑË÷È«²¿ 16 ¸öÎ»ÖÃ
+		// æœç´¢å…¨éƒ¨ 16 ä¸ªä½ç½®
 		for (int i = 0; i < size11 * size11; ++i) {
-			// Í¨¹ıÒì»òÔËËãµÃµ½·­×ªºóµÄ×´Ì¬
+			// é€šè¿‡å¼‚æˆ–è¿ç®—å¾—åˆ°ç¿»è½¬åçš„çŠ¶æ€
 			info next = { f.value ^ pos[i], f.step + 1 };
 			if (!vis[next.value]) {
 				q.push(next);
@@ -64,7 +64,7 @@ int BFS(int value) {
 		}
 	}
 
-	return -1;  // ÎŞ·¨µ½´ïÄ¿±ê×´Ì¬£¬·µ»Ø -1
+	return -1;  // æ— æ³•åˆ°è¾¾ç›®æ ‡çŠ¶æ€ï¼Œè¿”å› -1
 }
 
 int main(int argc, char const* argv[]) {
@@ -73,7 +73,7 @@ int main(int argc, char const* argv[]) {
 	int value = 0;
 	for (int i = 0; i < size11; ++i) {
 		scanf("%s", str);
-		// ¼ÆËãÆğÊ¼×´Ì¬µÄÖµ
+		// è®¡ç®—èµ·å§‹çŠ¶æ€çš„å€¼
 		for (int j = 0; j < size11; ++j) {
 			if (str[j] == 'w')
 				value += 1 << (i * size11 + j);
