@@ -1,79 +1,49 @@
 #include <iostream>
-#include <map>
-#include <stack>
+#include <queue>
 using namespace std;
 
-int father, node;
-stack<int> In, Post, InR, PostR;
-map<int, int> M; map<int, int>::iterator Mi;
-void Findright();
-
-void Findleft() {
-	int count = 0;
-	while (In.top() != node) {
-		++count;
-		InR.push(In.top()); In.pop();
+struct node {
+	int l, r, p, w, fa;
+	bool operator<(const node& x) const {
+		return w > x.w;
 	}
-	InR.push(In.top()); In.pop();//pop root
-
-	for (int i = 0; i < count; ++i) { PostR.push(Post.top()); Post.pop(); } //find node 2
-	father = node; node = Post.top(); cout << node << " "; //how to eliminate the blank
-	M.insert(map<int, int>::value_type(node, father));
-	PostR.push(Post.top()); Post.pop();
-
-}
-
-void Findright() {
-	Mi = M.find(node); int count = 0;
-	if (InR.empty() || InR.top() != Mi->second) { return; }
-	while (1) {
-		if (PostR.top() == Mi->first) { PostR.pop(); break; }
-		else { PostR.pop(); }
-	}
-	InR.pop();
-	while (!In.empty()) { In.pop(); }
-
-	while (1) {
-		if (PostR.top() == Mi->second) { break; }
-		++count;
-		Post.push(PostR.top()); PostR.pop();
-	}
-	if (count == 0) { return; }
-	PostR.push(Post.top()); // push back 9
-
-	for (int i = 0; i < count; ++i) { In.push(InR.top()); InR.pop(); }
-	if (!Post.empty()) {
-		father = Mi->second; node = Post.top();
-		M.insert(map<int, int>::value_type(node, father));
-		cout << node << " "; Post.pop();
-		while (!Post.empty()) {
-			while (!Post.empty()) { Findleft(); }
-			Findright();
-		}
-
-		node = Mi->second; Findright();
-	}
-}
+};node N[220];
 
 int main() {
-	int n = 0, root = 0; char nn;
-	while (cin >> n) { //inorder
-		In.push(n);
-		nn = cin.get();
-		if (nn == '\n') { break; }
+	priority_queue<node> q;
+	int n, w, t;
+	while (cin >> n) {
+		t = 0;
+		while (n--) {
+			cin >> w;
+			++t;
+			N[t] = node{ 0,0,t,w,0 };
+			q.push(N[t]);
+		}
+		while (q.size() > 1) {
+			node x1 = q.top();
+			q.pop();
+			node x2 = q.top();
+			q.pop();
+			++t;
+			N[t] = node{ x1.p,x2.p,t,x1.w + x2.w,0 };
+			N[x1.p].fa = t;
+			N[x2.p].fa = t;
+			q.push(N[t]);
+		}
+		int ans = 0;
+		for (int i = 1; i <= t; i++) {
+			if (N[i].l == 0) {
+				int dep = 0;
+				node x = N[i];
+				while (x.fa != 0) {
+					dep++;
+					x = N[x.fa];
+				}
+				ans += dep * N[i].w;
+			}
+		}
+		cout << ans << endl;
 	}
-	while (cin >> n) { //postorder
-		Post.push(n);
-		nn = cin.get();
-		if (nn == '\n') { break; }
-	}
-
-	if (Post.empty()) { return 0; } //empty input
-	root = n; node = n; cout << node << " ";
-	Post.pop(); PostR.push(node);//root
-
-	while (!Post.empty()) { Findleft(); } //find all node in the left
-	Findright();
-
 	return 0;
 }
