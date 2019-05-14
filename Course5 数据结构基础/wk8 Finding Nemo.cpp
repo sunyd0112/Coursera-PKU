@@ -20,26 +20,28 @@ priority_queue<Marlin> pri;
 
 void BFS() {
 	int x, y, x1, y1, door, door1;
+	while (!pri.empty()) { pri.pop(); }
 	pri.push(Marlin(0, 0, 0));
 	visited[0][0] = 1;
+
 	while (!pri.empty()) {
 		Marlin marlin = pri.top(); pri.pop();
 		x = marlin.x; y = marlin.y; door = marlin.door;
 		if (x == Nemox && y == Nemoy) { cout << door << endl; return; }
 
-		if (Lab[x][y + 1].d != -1 && visited[x][y + 1] != 1 && x >= 0 && y + 1 >= 0 && x<=maxx && y + 1<=maxy) {
+		if (Lab[x][y + 1].d != -1 && visited[x][y + 1] != 1 && x >= 0 && y + 1 >= 0 && x <= maxx && y + 1 <= maxy) {
 			x1 = x; y1 = y + 1;
 			visited[x1][y1] = 1;
 			door1 = door + Lab[x1][y1].d;
 			pri.push(Marlin(x1, y1, door1));
 		}
-		if (Lab[x][y - 1].u != -1 && visited[x][y - 1] != 1 && x >= 0 && y - 1>= 0 && x <= maxx && y - 1<= maxy) {
+		if (Lab[x][y - 1].u != -1 && visited[x][y - 1] != 1 && x >= 0 && y - 1 >= 0 && x <= maxx && y - 1 <= maxy) {
 			x1 = x; y1 = y - 1;
 			visited[x1][y1] = 1;
 			door1 = door + Lab[x1][y1].u;
 			pri.push(Marlin(x1, y1, door1));
 		}
-		if (Lab[x + 1][y].l != -1 && visited[x + 1][y] != 1 && x + 1>= 0 && y >= 0 && x + 1<= maxx && y <= maxy) {
+		if (Lab[x + 1][y].l != -1 && visited[x + 1][y] != 1 && x + 1 >= 0 && y >= 0 && x + 1 <= maxx && y <= maxy) {
 			x1 = x + 1; y1 = y;
 			visited[x1][y1] = 1;
 			door1 = door + Lab[x1][y1].l;
@@ -56,7 +58,7 @@ void BFS() {
 	return;
 }
 
-int main(){
+int main() {
 	int M, N;
 	while (cin >> M >> N) {
 		if (M == -1 && N == -1) { return 0; }
@@ -107,9 +109,9 @@ int main(){
 		double posx, posy;
 		cin >> posx >> posy;
 		if (posx < 1 || posy < 1 || posx>maxx || posy>maxy) {
-			cout << 0 << endl; continue; 
+			cout << 0 << endl; continue;
 		}
-	 	Nemox = (int)posx; Nemoy = (int)posy;
+		Nemox = (int)posx; Nemoy = (int)posy;
 		BFS();
 	}
 	return 0;
