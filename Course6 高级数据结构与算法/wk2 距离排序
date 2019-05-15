@@ -1,0 +1,47 @@
+#include<iostream>
+#include<iomanip>
+#include<cmath>
+#include<set>
+using namespace std;
+
+struct pos {
+	int f, s;
+	double distance;
+	pos (int _f, int _s, double _d):f(_f),s(_s),distance(_d){}
+};
+
+struct cmp {
+	bool operator() (const pos& p1, const pos& p2) {
+		if (p1.distance != p2.distance) { return p1.distance > p2.distance; }
+		else {
+			if (p1.f != p2.f) { return p1.f < p2.f; }
+			else return p1.s < p2.s;
+		}
+	}
+};
+
+int p[15][3] = { 0 };
+multiset<pos, cmp> Set; multiset<pos, cmp>::iterator si;
+
+int main() {
+	int n; cin >> n; int i = 0;
+	while (n - i >= 1) {
+		cin >> p[i][0] >> p[i][1] >> p[i][2];
+		++i;
+	}
+
+	for (int i = 0; i < n - 1; ++i) {
+		for (int j = i + 1; j < n; ++j) {
+			double result = sqrt(pow((p[i][0] - p[j][0]), 2) + pow((p[i][1] - p[j][1]), 2) + pow((p[i][2] - p[j][2]), 2));
+			Set.insert(pos(i, j, result));
+		}
+	}
+
+	while (!Set.empty()) {
+		si = Set.begin();
+		cout << "("<<p[si->f][0]<<","<< p[si->f][1] <<","<< p[si->f][2] <<")-("<< p[si->s][0] <<","<< p[si->s][1] <<","<< p[si->s][2] <<")="<< fixed << setprecision(2)<<si->distance << endl;
+		Set.erase(si);
+	}
+	
+	return 0;
+}
