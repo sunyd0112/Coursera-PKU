@@ -14,7 +14,7 @@ struct node
 node tree[50010];
 int cmp(node x, node y)
 {
-	return strcmp(x.s, y.s) < 0;    //×Ö·û´®±È½ÏÓÃÕâ¸ö£»»»³Éreturn x.s < y.s ¾ÍWAÁË
+	return strcmp(x.s, y.s) < 0;    //å­—ç¬¦ä¸²æ¯”è¾ƒç”¨è¿™ä¸ªï¼›æ¢æˆreturn x.s < y.s å°±WAäº†
 }
 void inset_node(int now)
 {
